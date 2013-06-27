@@ -13,7 +13,7 @@ into your extensions folder. You should now be able to navigate to `protected/ex
 #### Optional: Git Submodule
 You can also install this as a [Git submodule](http://git-scm.com/book/en/Git-Tools-Submodules). This can be done with running the following 
 command in the root of your project, where the path to the extensions folder (`protected/extensions`) might need updating.
-```
+```Shell
 git submodule add git://github.com/TagPlanet/yii-analytics-ua.git protected/extensions/TPUniversalAnalytics
 ```
 By using a submodule, this will guarantee you'll have access to the latest version at all times.
@@ -21,7 +21,7 @@ By using a submodule, this will guarantee you'll have access to the latest versi
 #### Step 2: Add in configuration
 Within your configuration files (usually found under `/protected/config/`) there is the "components" section. Just like your db and cache 
 components, we'll need to add in our own configuration for this. Add in the following code within the components section:
-```
+```php
 'universalAnalytics' => array(
     'class' =>'ext.TPUniversalAnalytics.components.TPUniversalAnalytics',
     'property' => 'UA-########-#',
@@ -31,7 +31,7 @@ components, we'll need to add in our own configuration for this. Add in the foll
 #### Step 3: (Optional) Add in auto-render
 In order for the Universal Analytics component to automatically render the code in the header, you must have the following two items configured:
  1.  *Configuration file* - within the universalAnalytics configuration, you must include:
-```
+```php
 'universalAnalytics' => array(
     'class' =>'ext.TPUniversalAnalytics.components.TPUniversalAnalytics',
     'property' => 'UA-########-#',
@@ -39,7 +39,7 @@ In order for the Universal Analytics component to automatically render the code 
 ),
 ```
  1.  *Controllers* - your controllers must have the following code:
-```
+```php
 protected function afterRender($view, &$output)
 {
     parent::afterRender($view, $output);
@@ -49,7 +49,7 @@ protected function afterRender($view, &$output)
 You can place this either within `protected/components/Controller.php` (or whichever Controller you are overloading) _or_ within 
 every single one of your controllers. In the event that you already have the method `afterRender` within your controllers, simple 
 add in the following line to it, before the return statement:
-```
+```php
 Yii::app()->universalAnalytics->render();
 ```
 
@@ -80,7 +80,7 @@ This component allows for some flexibility within the configuration section. Bel
 
 Also allowed within the configuration options are any of the [create-only properties](https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#create) 
 that Universal Analytics allows within the create call. Simply use the field name, as specified within Google's documentation. Below is a configuration example with some of the create-only properties used:
-```
+```php
 'universalAnalytics' => array(
     'class' =>'ext.TPUniversalAnalytics.components.TPUniversalAnalytics',
     'property' => 'UA-########-#',
@@ -92,7 +92,7 @@ that Universal Analytics allows within the create call. Simply use the field nam
 ```
 
 The above example would render the following on-page code:
-```
+```javascript
 ga('create', 'UA-########-#', {
     "cookieDomain": "none",
     "legacyCookieDomain": "none",
@@ -104,7 +104,7 @@ ga('create', 'UA-########-#', {
 
 #### Accessing Universal Analytics in Yii
 Since the Universal Analytics extension is setup as a component, you can simply use the following call to access the extension:
-```
+```php
 Yii::app()->universalAnalytics
 ```
 
@@ -120,7 +120,7 @@ ga('send', 'event', 'foobar category', 'ze action!');
 ```
 
 Within a controller or view, you can do the same as above via the extension:
-```
+```php
 Yii::app()->universalAnalytics->send('event', 'foobar category', 'ze action!');
 ```
 
