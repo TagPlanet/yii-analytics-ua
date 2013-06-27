@@ -92,7 +92,7 @@ EOT;
             if(count($this->_settingsData))
             {
                 $js.= "ga('create', '{$this->property}', ";
-                $js.= json_encode($this->_settingsData, JSON_UNESCAPED_SLASHES);
+                $js.= CJSON::encode($this->_settingsData);
                 $js.= ");" . PHP_EOL;
             }
             else
@@ -119,7 +119,7 @@ EOT;
                     {
                         case 'array':
                         case 'object': 
-                            $tempData[] = json_encode($data, JSON_UNESCAPED_SLASHES);
+                            $tempData[] = CJSON::encode($data);
                         break;
                         case 'integer':
                         case 'double':
