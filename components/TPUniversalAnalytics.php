@@ -165,8 +165,14 @@ EOT;
     {
         switch($method)
         {
+            // Stupid ecommerce plugin, messing things up
+            case 'ecommerce_send':
+            case 'ecommerce_addItem':
+            case 'ecommerce_addTransaction':
+                $method = str_replace('_', ':', $method);
             case 'send':
             case 'set':
+            case 'require':
                 $this->_calledData[] = array(
                     'type' => $method,
                     'data' => $args,
