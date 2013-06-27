@@ -32,7 +32,7 @@ components, we'll need to add in our own configuration for this. Add in the foll
 In order for the Universal Analytics component to automatically render the code in the header, you must have the following two items configured:
  1.  *Configuration file* - within the universalAnalytics configuration, you must include:
 ```
-'googleAnalytics' => array(
+'universalAnalytics' => array(
     'class' =>'ext.TPUniversalAnalytics.components.TPUniversalAnalytics',
     'property' => 'UA-########-#',
     'autoRender' => true,
@@ -79,7 +79,26 @@ This component allows for some flexibility within the configuration section. Bel
     * Default: false
 
 Also allowed within the configuration options are any of the [create-only properties](https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#create) 
-that Universal Analytics allows within the create call. Simply use the field name, as specified within Google's documentation.
+that Universal Analytics allows within the create call. Simply use the field name, as specified within Google's documentation. Below is a configuration example with some of the create-only properties used:
+```
+'universalAnalytics' => array(
+    'class' =>'ext.TPUniversalAnalytics.components.TPUniversalAnalytics',
+    'property' => 'UA-########-#',
+    'autoRender' => true,
+    'cookieDomain' => 'none',
+    'legacyCookieDomain' => 'none',
+    'sampleRate' => 80,
+),
+```
+
+The above example would render the following on-page code:
+```
+ga('create', 'UA-########-#', {
+    "cookieDomain": "none",
+    "legacyCookieDomain": "none",
+    "sampleRate": 80
+});
+```
  
 ## Usage
 
