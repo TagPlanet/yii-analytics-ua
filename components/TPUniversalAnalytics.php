@@ -8,24 +8,33 @@
  * @link https://github.com/TagPlanet/yii-analytics-ua
  * @copyright Copyright &copy; 2013 Philip Lawrence
  * @license http://tagpla.net/licenses/MIT.txt
- * @version 1.0.0-alpha
+ * @version 1.0.1
  */
 class TPUniversalAnalytics extends CApplicationComponent
 {
     /**
      * Property ID
+     * @var string
      */
     public $property = '';
     
     /**
      * Debug
+     * @var bool
      */
     public $debug = false;
     
     /**
      * Auto Render
+     * @var bool
      */
     public $autoRender = false;
+
+    /**
+     * Automatically add trackPageview when render is called
+     * @var bool
+     */
+    public $autoPageview = true;
     
     /**
      * Allowable Settings
@@ -75,6 +84,12 @@ class TPUniversalAnalytics extends CApplicationComponent
             {
                 $this->_debug('No property ID for Universal Analytics - cannot render', 'error');
                 return;
+            }
+            
+            // Check to see if we need to throw in the trackPageview call
+            if($this->autoPageview && !in_array('_trackPageview', $this->_calledData))
+            {
+                $this->send('pageview');
             }
             
             // Setup code block
