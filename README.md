@@ -8,7 +8,7 @@ Below will give you an overview of how to install and use the basics of this ext
 
 #### Step 1: Upload the files
 The first step is straightforward; simply unzip the files from the [latest download](https://github.com/TagPlanet/yii-analytics-ua/archive/development.zip) 
-into your extensions folder. You should now be able to navigate to `protected/extensions/TPUniversalAnlaytics/components` and see a file called `TPUniversalAnalytics.php`.
+into a directory under extensions called TPUniversalAnlaytics. You should now be able to navigate to `protected/extensions/TPUniversalAnlaytics/components` and see a file called `TPUniversalAnalytics.php`.
 
 #### Optional: Git Submodule
 You can also install this as a [Git submodule](http://git-scm.com/book/en/Git-Tools-Submodules). This can be done with running the following 
@@ -202,7 +202,7 @@ If you have auto rendering disabled (which it is by default), then you can call 
 which will return the rendered Universal Analytics JavaScript code. In almost all cases, you should use this in your main layout views (e.g. `protected/views/layouts/main.php`)
 ```html
 <script type="text/JavaScript">
-<?php echo Yii::app()->googleAnalytics()->render(); ?>
+<?php echo Yii::app()->universalAnalytics->render(); ?>
 </script>
 ```
 
