@@ -8,7 +8,7 @@
  * @link https://github.com/TagPlanet/yii-analytics-ua
  * @copyright Copyright &copy; 2013 Philip Lawrence
  * @license http://tagpla.net/licenses/MIT.txt
- * @version 1.0.1
+ * @version 1.1.0
  */
 class TPUniversalAnalytics extends CApplicationComponent
 {

@@ -72,6 +72,11 @@ This component allows for some flexibility within the configuration section. Bel
     * Type: boolean
     * Recommend Setting: true
     * Default: false   
+  * **autoPageview** - Automatically add a `ga('send', 'pageview')` event on every `render` call
+    * Required: no
+    * Type: boolean
+    * Recommend Setting: true
+    * Default: true   
   * **debug** - Changes Google's JS to their [analytics_debug.js file](https://developers.google.com/analytics/resources/articles/gaTrackingTroubleshooting#gaDebug) and includes Yii debugging
     * Required: no
     * Type: boolean
