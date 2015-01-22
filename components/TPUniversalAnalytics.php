@@ -6,9 +6,9 @@
  * @link http://misterphilip.com
  * @link http://tagpla.net
  * @link https://github.com/TagPlanet/yii-analytics-ua
- * @copyright Copyright &copy; 2013 Philip Lawrence
+ * @copyright Copyright &copy; 2013 - 2015 Philip Lawrence
  * @license http://tagpla.net/licenses/MIT.txt
- * @version 1.1.0
+ * @version 1.1.1
  */
 class TPUniversalAnalytics extends CApplicationComponent
 {
@@ -35,23 +35,6 @@ class TPUniversalAnalytics extends CApplicationComponent
      * @var bool
      */
     public $autoPageview = true;
-    
-    /**
-     * Allowable Settings
-     * @protected
-     */
-    protected $_settings = array(
-         'alwaysSendReferrer',
-                'allowAnchor',
-                   'clientId',
-               'cookieDomain',
-              'cookieExpires',
-                 'cookiePath',
-         'legacyCookieDomain',
-                       'name',
-                 'sampleRate',
-        'siteSpeedSampleRate',
-    );
     
     /**
      * Settings Data
@@ -210,7 +193,7 @@ EOT;
      */
     public function __set($property, $value)
     {
-        if(in_array($property, $this->_settings) && $value !== null && $value != '')
+        if($value !== null && $value != '')
         {
             $this->_settingsData[$property] = $value;
             return;
