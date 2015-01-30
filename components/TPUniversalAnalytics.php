@@ -36,6 +36,13 @@ class TPUniversalAnalytics extends CApplicationComponent
      */
     public $autoPageview = true;
     
+    
+    /**
+    * Track clicks on outbound links
+    * @var boolean
+    */
+    public $trackOutlinks = false;
+    
     /**
      * Settings Data
      * @protected
@@ -53,6 +60,21 @@ class TPUniversalAnalytics extends CApplicationComponent
      * @protected
      */
     protected $_hasRendered = false;
+    
+    /**
+    * Create an outbound URL.
+    * Note that 'onclick' will be overruled in the HTMLoptions
+    * 
+    * @param string $text link body
+    * @param string $url the link, passed to {@link CHtml::link}
+    * @param array $htmlOptions additional HTML attributes, passed to {@link CHtml::link}
+    */
+    public function outLink($text, $url='#', $htmlOptions=array())
+    {
+        $this->trackOutlinks = true;
+        $htmlOptions = CMap::mergeArray($htmlOptions, array('onclick'=>"tpuaTrackOutLinks('".$url."'); return false;"));
+        return CHtml::link($text, $url, $htmlOptions);
+    }
     
     /**
      * Render JS
@@ -96,6 +118,14 @@ EOT;
             else
             {
                 $js.= "ga('create', '{$this->property}');" . PHP_EOL;
+            }
+            
+            // Are outlinks being tracked?
+            if($this->trackOutlinks)
+            {
+                $js.= "var tpuaTrackOutLinks = function(url) {ga('send','event'," .
+                      "'outbound','click',url,{'hitCallback': function()" .
+                      "{ document.location=url; }});}" . PHP_EOL;
             }
         
             // Append a period if we have an identifier (name)
